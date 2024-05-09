@@ -1,0 +1,38 @@
+
+<nav class="navbar navbar-expand-sm navbar-ligh bg-ligh">
+  <div class="container-fluid">
+        <img  *ngIf="(accountService.currentUser$ |async) as user" [src]="user.avatar" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+        <strong *ngIf="(accountService.currentUser$ |async) as user">Welcome {{user.username}}</strong>
+        <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav col-11">
+        <li class="nav-item ms-auto me-auto">
+          <a class="nav-link fw-bold" [routerLink]="['/shop']">Comprar</a>
+        </li>
+        <li class="nav-item me-auto">
+          <a class="nav-link fw-bold" href="javascript:void(0)"><img src="/assets/img/eco-removebg-preview.png" alt="Avatar Logo"  class="rounded-pill img-logo"></a>
+        </li>
+        <li class="nav-item me-auto">
+          <a class="nav-link fw-bold" href="javascript:void(0)">Conoce más</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <img src="/assets/img/carrito.png"
+        alt="logo"
+        class="logo"
+        style="max-height: 3pc;"
+        [routerLink]="['/']"
+        routerLinkActive="active" />
+      </div>
+      <a  *ngIf="(accountService.currentUser$ |async) == null" routerLink="/account/login" class="">
+        <button class="btn btn-primary ms-4" type="button">Iniciar</button>
+      </a>
+        <button *ngIf="(accountService.currentUser$ |async) as user" (click)="accountService.logout()" type="button" class="btn btn-primary" >
+          <i class="fa fa-sign-out me-3"></i>
+        </button>
+    </div>
+  </div>
+</nav>
+
+
+
+
