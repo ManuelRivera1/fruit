@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   returnUrl: string;
   form!: FormGroup;
+  isNotUser: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
@@ -32,6 +33,10 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.form.value).subscribe({
       next: user => {
         this.router.navigateByUrl(this.returnUrl);
+      },
+      error: err => {
+        this.isNotUser = !this.isNotUser;
+        console.log(err);
       }
     })
   }

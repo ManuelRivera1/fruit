@@ -1,1 +1,20 @@
-<p>shop works!</p>
+<div class="container mt-5" style="background: #95d6d91a;">
+  <h1 class="text-center">Tienda</h1>
+  <div class="row">
+      <!-- Tarjeta 1 -->
+      <div class="col-md-4" *ngFor="let item of data">
+        <div class="card rounded-4 caja">
+          <img [src]="item.img" class="card-img-top img-thumbnail" [alt]="item.name">
+          <div class="card-body">
+            <h5 class="card-title">Nombre: {{item.name}}</h5>
+            <p class="card-text">Descripción: <span class="badge bg-secondary">{{item.descripcion}}</span></p>
+            <div class="ratings" >
+              Stock disponible: <span [class]="item.catidadDis > 0 ?'badge bg-success' : 'badge bg-danger'"> {{item.catidadDis}}</span>
+            </div>
+            <p class="mt-2"> Precio: <span class="price-time mt-2">${{item.precio}}</span></p>
+            <button href="#" class=" rounded-pill btn btn-success col-12 gradiant" [disabled]="item.catidadDis == 0" >Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

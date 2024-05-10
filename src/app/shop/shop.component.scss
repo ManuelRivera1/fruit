@@ -1,0 +1,37 @@
+.caja {
+  margin: 20px;
+  -webkit-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+}
+.gradiant{
+  -webkit-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 7px 5px 0px rgba(0,0,0,0.75);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure images cover the area well */
+}
+
+.ratings .badge {
+  margin-right: 5px;
+}
+
+.price-time {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-title {
+  color: #333; /* Dark grey color for text */
+  margin-bottom: 10px;
+}
+
+.card-text .badge {
+  margin-right: 5px;
+  color: white;
+  background-color: #666; /* Dark background for the category */
+}

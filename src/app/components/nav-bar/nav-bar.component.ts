@@ -7,7 +7,11 @@ import { AccountService } from 'src/app/account/account.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
+  status = false;
   constructor(
     public accountService: AccountService
   ) { }
+  dropMenu() {
+    this.status = !this.status;
+  }
 }

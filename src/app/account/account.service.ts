@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { AbstractControl, AsyncValidatorFn } from '@angular/forms'
 import { Router } from '@angular/router'
@@ -11,6 +11,10 @@ import { IAddress, IUser } from 'src/shared/interface/iuser'
 })
 export class AccountService {
   api = environment.url
+  private httpOptions = {
+    headers: new HttpHeaders(),
+    params: new HttpParams()
+};
   private currentUserSource = new ReplaySubject<IUser | null>(1)
   currentUser$ = this.currentUserSource.asObservable()
 
@@ -42,8 +46,14 @@ export class AccountService {
    * @returns Observable<IUser>
    */
   register(values: any) {
-    return this.http.post<IUser>(this.api + 'account/register', values).pipe(
+    console.log(values)
+    this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
+    const sbody = {
+      "name": values.name
+    }
+    return this.http.post<IUser>(`${this.api}/login`,sbody,this.httpOptions).pipe(
       map((user) => {
+        console.log(user)
         localStorage.setItem('token', user.token)
         this.currentUserSource.next(user)
         return user
@@ -60,47 +70,4 @@ export class AccountService {
     this.router.navigateByUrl('/')
   }
 
-  /**
-   * # Check Email Exists
-   * ---
-   * @description Checks if user email exists
-   * @param {string} input
-   * @return {Observable<boolean>}
-   */
-  checkEmailExists(input: string) {
-    return this.http.get<boolean>(
-      this.api + 'account/emailexists?email=' + input,
-    )
-  }
-
-  loadCurrentUser(token: string | null) {
-    if (token == null) {
-      this.currentUserSource.next(null)
-      return of(null)
-    }
-    let headers = new HttpHeaders()
-    headers = headers.set('Authorization', `Bearer ${token}`)
-
-    return this.http
-      .get<IUser>(`${this.api}account/CurrentUser`, { headers })
-      .pipe(
-        map((user) => {
-          if (user) {
-            localStorage.setItem('token', user.token)
-            this.currentUserSource.next(user)
-            return user
-          } else {
-            return null
-          }
-        }),
-      )
-  }
-
-  getUserAddress() {
-    return this.http.get<IAddress>(this.api + 'account/address')
-  }
-
-  updateUserAddress(address: IAddress) {
-    return this.http.put<IAddress>(this.api + 'account/address', address)
-  }
 }

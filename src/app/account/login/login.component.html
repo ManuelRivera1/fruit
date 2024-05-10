@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center mt-5">
+<div class="container d-flex justify-content-center mt-5 contents">
   <div class="col-3">
     <div class="text-center mb-4">
       <h1 class="mb-3">Login</h1>
@@ -13,15 +13,15 @@
         <label for="pwd" class="form-label">Password:</label>
         <input type="password" formControlName="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
       </div>
-      <div class="form-check mb-3">
-        <label class="form-check-label">
-          <input autocomplete="nope" class="form-check-input" type="checkbox" name="remember"> Remember me
+      <div  *ngIf="!isNotUser" class="form-check mb-3 error">
+        <label class="form-check-label" style="color: brown;" >
+          el usuario no se encuentra registrado, <a  routerLink="/account/register">registrate</a>
         </label>
       </div>
-      <button class="btn btn-lg btn-primary"
+      <button class=" col-12 btn btn-lg btn-success"
       [disabled]="form.invalid"
-      type="submit">iniciar</button>
+      type="submit">Iniciar</button>
     </form>
-
+    <a  routerLink="/account/register">registrate</a>
   </div>
 </div>

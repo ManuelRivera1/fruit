@@ -1,1 +1,27 @@
-<p>register works!</p>
+<div class="container d-flex justify-content-center mt-5 contents">
+  <div class="col-3">
+    <div class="text-center mb-4">
+      <h1 class="mb-3">Registrar</h1>
+    </div>
+    <form  [formGroup]="form"
+    (ngSubmit)="onSubmit()" autocomplete="nope">
+      <div class="mb-3 mt-3">
+        <label for="user" class="form-label">user:</label>
+        <input autocomplete="nope" type="number" class="form-control" formControlName="user" id="user" placeholder="Enter user" name="user">
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input type="password" formControlName="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+      </div>
+      <div  *ngIf="!isNotUser" class="form-check mb-3 error">
+        <label class="form-check-label" style="color: brown;" >
+          hubo un problema al registrar, vulva e intente de nuevo
+        </label>
+      </div>
+      <button class=" col-12 btn btn-lg btn-success"
+      [disabled]="form.invalid"
+      type="submit">Registrar</button>
+    </form>
+
+  </div>
+</div>
