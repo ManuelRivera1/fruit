@@ -12,7 +12,7 @@
               Stock disponible: <span [class]="item.catidadDis > 0 ?'badge bg-success' : 'badge bg-danger'"> {{item.catidadDis}}</span>
             </div>
             <p class="mt-2"> Precio: <span class="price-time mt-2">${{item.precio}}</span></p>
-            <button href="#" class=" rounded-pill btn btn-success col-12 gradiant" [disabled]="item.catidadDis == 0" >Añadir al carrito</button>
+            <button href="#" class=" rounded-pill btn btn-success col-12 gradiant" [disabled]="item.catidadDis == 0" (click)="addcarrito(item)">Añadir al carrito</button>
           </div>
         </div>
       </div>

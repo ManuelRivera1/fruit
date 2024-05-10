@@ -1,6 +1,29 @@
+<nav class="p-3 text-bg-light">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <img src="/assets/img/eco-removebg-preview.png" style="cursor: pointer;" routerLink="" alt="Avatar Logo" width="10%" class="rounded-pill ">
 
-<nav class="navbar navbar-expand-sm navbar-ligh bg-ligh">
-  <div class="container-fluid">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a class="text-dark nav-link fw-bold" [routerLink]="['/shop']">Comprar</a></li>
+        <li><a class="text-dark nav-link fw-bold" href="javascript:void(0)">Conoce más</a></li>
+        <li>
+        <a class="text-dark nav-link fw-bold" *ngIf="(accountService.currentUser$ |async)" routerLink="/account/login" >
+          Crear Productos
+        </a>
+        </li>
+      </ul>
+
+      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 carts-comp" role="search">
+        <span [class]="cart?.length > 0 ?'badge bg-success rounded-circle' : 'badge bg-danger rounded-circle'"> {{cart?.length}}</span>
+        <img src="/assets/img/carrito.png"
+        alt="logo"
+        class="logo"
+        style="max-height: 3pc;"
+        [routerLink]="['/']"
+        routerLinkActive="active" />
+      </div>
+
+      <div class="text-end d-flex align-items-center">
         <img  *ngIf="(accountService.currentUser$ |async) as user" [src]="user.avatar" alt="Avatar Logo" style="width:40px;" class="rounded-pill me-3">
         <div class="dropdown dropend" *ngIf="(accountService.currentUser$ |async) as user">
           <strong  style="cursor: pointer;" class="dropdown-toggle" (click)="dropMenu()" data-bs-toggle="dropdown">
@@ -12,29 +35,13 @@
             </li>
           </ul>
         </div>
-        <div class="collapse navbar-collapse" id="mynavbar">
-      <ul class="navbar-nav col-11">
-        <li class="nav-item ms-auto me-auto">
-          <a class="nav-link fw-bold" [routerLink]="['/shop']">Comprar</a>
-        </li>
-        <li class="nav-item me-auto">
-          <a class="nav-link fw-bold" href="javascript:void(0)"><img src="/assets/img/eco-removebg-preview.png" alt="Avatar Logo"  class="rounded-pill img-logo"></a>
-        </li>
-        <li class="nav-item me-auto">
-          <a class="nav-link fw-bold" href="javascript:void(0)">Conoce más</a>
-        </li>
-      </ul>
-      <div class="d-flex align-items-center">
-        <img src="/assets/img/carrito.png"
-        alt="logo"
-        class="logo"
-        style="max-height: 3pc;"
-        [routerLink]="['/']"
-        routerLinkActive="active" />
+        <a  *ngIf="(accountService.currentUser$ |async) == null" routerLink="/account/login" class="">
+          <button class="btn btn-success me-2" type="button">Iniciar</button>
+        </a>
+        <a  *ngIf="(accountService.currentUser$ |async) == null" routerLink="/account/register" class="">
+          <button type="button" class="btn btn-warning text-light">Registrar</button>
+        </a>
       </div>
-      <a  *ngIf="(accountService.currentUser$ |async) == null" routerLink="/account/login" class="">
-        <button class="btn btn-success ms-4" type="button">Iniciar</button>
-      </a>
     </div>
   </div>
 </nav>
