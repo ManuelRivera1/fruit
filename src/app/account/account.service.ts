@@ -5,6 +5,7 @@ import { Router } from '@angular/router'
 import { BehaviorSubject, map, Observable, of, ReplaySubject } from 'rxjs'
 import { environment } from 'src/environments/environment'
 import { IAddress, IUser } from 'src/shared/interface/iuser'
+import { CartService } from '../services/cart.services'
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<IUser | null>(1)
   currentUser$ = this.currentUserSource.asObservable()
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private cartService: CartService) {}
 
   /**
    * # Login
@@ -28,7 +29,6 @@ export class AccountService {
    * @returns Observable<IUser>
    */
   login(input: any) {
-    console.log(input)
     return this.http.get<IUser>(`${this.api}/login/${input?.user}`).pipe(
       map((user) => {
         localStorage.setItem('token', user.token)
@@ -46,14 +46,12 @@ export class AccountService {
    * @returns Observable<IUser>
    */
   register(values: any) {
-    console.log(values)
     this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
     const sbody = {
       "name": values.name
     }
     return this.http.post<IUser>(`${this.api}/login`,sbody,this.httpOptions).pipe(
       map((user) => {
-        console.log(user)
         localStorage.setItem('token', user.token)
         this.currentUserSource.next(user)
         return user
@@ -68,6 +66,7 @@ export class AccountService {
     localStorage.removeItem('token')
     this.currentUserSource.next(null)
     this.router.navigateByUrl('/')
+    this.cartService.clearCart();
   }
 
 }

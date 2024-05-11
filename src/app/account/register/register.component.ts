@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
         },
         error: err => {
           this.isNotUser = !this.isNotUser;
-          console.log(err);
         }
       })
     }

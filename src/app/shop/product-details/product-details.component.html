@@ -1,0 +1,57 @@
+<div class="container mt-4">
+  <div class="row">
+      <div class="col-md-8">
+          <!-- Tarjeta del Producto -->
+          <div class="card mb-3 gradiant rounded-4">
+              <div class="card-body">
+                  <h5 class="card-title">Productos ⚡ FULL</h5>
+                  <div class="d-flex justify-content-start align-items-center mb-3 p-2 rounded-5 gradiant"  *ngFor="let carts of cart">
+                      <img [src]="carts?.img" class="img-thumbnail" alt="Producto" style="width: 120px; height: auto; margin-right: 20px;">
+                      <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6>{{carts?.name}} - <span class="badge bg-secondary">{{carts?.descripcion}}</span></h6>
+                              <div>
+                                  <button class="btn btn-outline-danger btn-sm" (click)="removeFromCart(carts)">Eliminar</button>
+                              </div>
+                              <div class="" style="width: 120px;">
+                                  <button *ngIf="carts.cantidad > 1" (click)="decrementQuantity(carts)" class="btn btn-outline-secondary me-2" type="button">-</button>
+                                  <span [class]="carts.cantidad > 0 ? 'badge bg-success rounded-circle' : 'badge bg-danger rounded-circle'">{{ carts.cantidad }}</span>
+                              </div>
+                              <div style="display: grid;align-items: center;justify-items: center;">
+                                  <span class="text-success" style="text-decoration-line: line-through;" >-10% ${{carts?.precio}}</span>
+                                  <strong>${{descuento(carts?.precio,carts?.cantidad)}}</strong>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Envío -->
+          <div class="card gradiant rounded-4">
+              <div class="card-body">
+                  <h6 class="card-title">Envío <span class="badge bg-success">Gratis</span></h6>
+                  <div class="progress">
+                    <div class="progress-bar bg-success" style="width:100%"></div>
+                  </div>
+                <p>Aprovecha tu envío gratis agregando más. <a href="#">Ver más productos Full</a></p>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <!-- Resumen de compra -->
+          <div class="card rounded-4 gradiant">
+              <div class="card-body ">
+                  <h5 class="card-title">Resumen de compra</h5>
+                  <ul class="list-unstyled">
+                      <li>Producto <span class="float-end">${{total}}</span></li>
+                      <li>Envío <span class="float-end">Gratis</span></li>
+                      <li>Cupones <span class="float-end">-</span></li>
+                      <li><strong>Total <span class="float-end">${{total}}</span></strong></li>
+                  </ul>
+                  <button class="btn btn-primary w-50 gradiant" (click)="compra()">Comprar</button>
+                  <button class="btn btn-danger w-50 gradiant" (click)="clearCart()">Cancelar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

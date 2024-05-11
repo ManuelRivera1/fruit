@@ -38,10 +38,10 @@ nav{
 .carts-comp{
   position: relative;
   display: inline-block;
-  .badge {
+  .badge-cart {
     position: absolute;
     top: 0px;
-    right: -10px;
+    left: 30px;
     z-index: 2;
     -webkit-box-shadow: 2px 4px 4px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 4px 4px 0px rgba(0,0,0,0.75);
@@ -58,5 +58,38 @@ nav{
         text-align: center;
     }
 }
+}
+.shop-list{
+  flex-direction: column;
+  max-height: 15pc;
+  overflow-y: auto;
+  background: white; /* Fondo blanco para mayor legibilidad */
+  border: 1px solid #ccc;
+  .badge {
+    -webkit-box-shadow: 2px 4px 4px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 4px 4px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 4px 4px 0px rgba(0,0,0,0.75);
+    margin-left: 10px;
+  }
+  .item-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  .item-name {
+    margin-left: 10px;
+    flex-grow: 1; /* Permite que el nombre del artículo tome el espacio necesario */
+  }
+
+  .item-price {
+      margin-left: 10px; /* Espacio entre el nombre y el precio */
+  }
+  .delete{
+    margin-left: 10px;
+  }
+  .remove{
+    margin-left: 10px;
+  }
 }
 

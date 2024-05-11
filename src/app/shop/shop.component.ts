@@ -34,7 +34,6 @@ export class ShopComponent implements OnInit {
         alert("Debes iniciar sesion para agregar productos al carrito");
         this.router.navigateByUrl(this.returnUrl)
       }
-      console.log("d",this.accountService.currentUser$);
     }
     authPermite(){
       this.accountService.currentUser$.subscribe(user => {
@@ -45,12 +44,9 @@ export class ShopComponent implements OnInit {
       this.shopService.getProducts().subscribe({
         next: product => {
           this.data = product;
-          console.log(product);
-          // this.router.navigateByUrl(this.returnUrl);
         },
         error: err => {
           this.isNotUser = !this.isNotUser;
-          console.log(err);
         }
       })
     }

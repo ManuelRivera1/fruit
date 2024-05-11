@@ -2,7 +2,8 @@ export interface IUser {
   email: string;
   username: string;
   avatar: string;
-  token: string
+  token: string;
+  id: string;
 }
 
 export interface IAddress {
