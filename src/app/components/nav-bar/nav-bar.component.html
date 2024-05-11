@@ -5,15 +5,19 @@
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a class="text-dark nav-link fw-bold" [routerLink]="['/shop']">Comprar</a></li>
-        <li><a class="text-dark nav-link fw-bold" href="javascript:void(0)">Conoce más</a></li>
-        <li>
-        <a class="text-dark nav-link fw-bold" *ngIf="(accountService.currentUser$ | async)?.id === '1'"  routerLink="/account/login" >
-          Crear Productos
-        </a>
+        <li *ngIf="(accountService.currentUser$ | async)?.id === '1'">
+          <a class="text-dark nav-link fw-bold" routerLink="/shop/admonProduc" >
+            Crear Productos
+          </a>
+        </li>
+        <li *ngIf="(accountService.currentUser$ | async)?.id === '1'">
+          <a class="text-dark nav-link fw-bold"  routerLink="/shop/listBuys" >
+            Gestionar pedidos
+          </a>
         </li>
       </ul>
 
-      <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 carts-comp" role="search" style="cursor: pointer;">
+      <div class="col-2 col-lg-auto mb-3 mb-lg-0 me-lg-3 carts-comp" role="search" style="cursor: pointer;">
         <span [class]="cart?.length > 0 ?'badge badge-cart bg-success rounded-circle' : 'badge badge-cart bg-danger rounded-circle'"> {{cart?.length}}</span>
         <img  src="/assets/img/carrito.png" (click)="dropShop()"
         alt="logo"

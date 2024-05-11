@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class CartService {
         existingProduct.cantidad++;
         // existingProduct.valor = this.descuento(existingProduct.valor, existingProduct.cantidad)
       } else {
-        alert('No puedes agregar más de este producto al carrito.');
+        Swal.fire({
+          title: '¡Ups!',
+          text: 'No puedes agregar más de este producto al carrito.',
+          icon: 'info'
+        });
         return;
       }
     } else {

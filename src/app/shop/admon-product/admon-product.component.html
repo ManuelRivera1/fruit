@@ -1,0 +1,90 @@
+<div class="container d-flex justify-content-center mt-5 contents" *ngIf="validate">
+  <div class="col-12 col-md-5">
+    <div class="text-center mb-4">
+      <h1 class="mb-3" *ngIf="typeSolicitud === 'edit'">Editar</h1>
+      <h1 class="mb-3" *ngIf="typeSolicitud === 'add'">Registrar</h1>
+    </div>
+    <form  [formGroup]="form"
+    (ngSubmit)="onSubmit()" autocomplete="nope">
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label">nombre:</label>
+        <input autocomplete="nope" type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">descripcion:</label>
+        <input type="text" formControlName="descripcion" class="form-control" id="descripcion" placeholder="Enter descripcion" name="descripcion">
+      </div>
+      <div class="mb-3">
+        <label for="precio" class="form-label">precio:</label>
+        <input type="number" formControlName="precio" class="form-control" id="precio" placeholder="Enter precio" name="precio">
+      </div>
+      <div class="mb-3">
+        <label for="catidadDis" class="form-label">catidad Disponible:</label>
+        <input type="number" formControlName="catidadDis" class="form-control" id="catidadDis" placeholder="Enter catidadDis" name="catidadDis">
+      </div>
+      <div  *ngIf="isNotUser" class="form-check mb-3 error">
+        <label class="form-check-label" style="color: brown;" >
+          hubo un problema al crear, el producto o editar
+        </label>
+      </div>
+      <button class=" col-12 btn btn-lg btn-success"
+      [disabled]="form.invalid"
+      type="submit" *ngIf="typeSolicitud === 'add'">Crear</button>
+      <button class=" col-12 btn btn-lg btn-success"
+      [disabled]="form.invalid"
+      type="submit" *ngIf="typeSolicitud === 'edit'">Editar</button>
+    </form>
+
+  </div>
+</div>
+
+<div class="container mt-3 table-responsive" *ngIf="!validate">
+  <div class="row pb-4">
+    <div class="col-sm-3 col-md-4 col-3">
+      <button class=" col-12 btn btn-lg btn-success"
+        type="submit" (click)="addAndEdit('add')">Crear</button>
+    </div>
+    <div class="col-sm-2 col-md-4 col-9">
+      <h2>Administrar productos</h2>
+    </div>
+    <div class="col-sm-2 col-md-4 col-12">
+      <input id="inputSearch" placeholder="Busca un subprofile" type="text" class="ng-pristine ng-valid ng-touched" (keyup)="searchProfiles($event)">
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped" *ngIf="data?.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Fecha creación</th>
+          <th>name</th>
+          <th>img</th>
+          <th>descripcion</th>
+          <th>precio</th>
+          <th>cantidadDis</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{item.id}}</td>
+          <td>{{item.createdAt}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.img}}</td>
+          <td>{{item.descripcion}}</td>
+          <td>{{item.precio}}</td>
+          <td>{{item.catidadDis}}</td>
+          <td>
+            <button class="btn btn-success me-1" (click)="edit('edit',item)"><i data-bs-toggle="tooltip" style="color: white;" title="Eliminar producto" class="fa fa-pencil me-2"></i></button>
+            <button class="btn btn-danger" (click)="delete(item.id)"><i data-bs-toggle="tooltip" style="color: white;" title="Eliminar producto" class="fa fa-trash me-2"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noData>
+      <div class="container text-center">
+        <h1> No hay data para mostrar</h1>
+      </div>
+    </ng-template>
+  </div>
+</div>

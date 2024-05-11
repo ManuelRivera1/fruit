@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -30,11 +31,32 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "bottom-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
     this.accountService.login(this.form.value).subscribe({
       next: user => {
-        this.router.navigateByUrl(this.returnUrl);
+        Toast.fire({
+          icon: "success",
+          title: "Se incio secion correctamente"
+        });
+        setTimeout(() => {
+          this.router.navigateByUrl(this.returnUrl);
+        }, 100);
       },
       error: err => {
+        Toast.fire({
+          icon: "error",
+          title: "No se pudo iniciar sesion, por favor intente de nuevo o registrese"
+        });
         this.isNotUser = !this.isNotUser;
       }
     })

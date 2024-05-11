@@ -8,8 +8,8 @@ import { IProducto } from 'src/shared/interface/iproducto';
 @Injectable({
   providedIn: 'root'
 })
-export class ShopService {
-  api = environment.url;
+export class BuyService {
+  api = environment.url2;
   constructor(private http: HttpClient) { }
   private httpOptions = {
     headers: new HttpHeaders(),
@@ -21,10 +21,10 @@ export class ShopService {
    * @description This method gets all products
    * @returns Obserervable<IPagination>
    */
-  getProducts() {
+  getProductsBuy() {
     let params = new HttpParams();
 
-    return this.http.get<IProducto>(`${this.api}/articulos`)
+    return this.http.get<IProducto>(`${this.api}/buy`)
       .pipe(
         map(
           response => { return response }
@@ -42,12 +42,14 @@ export class ShopService {
 register(values: any) {
   this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
   const sbody = {
-    "name": values.name,
-    "descripcion": values.descripcion,
-    "precio": values.precio,
-    "catidadDis": values.catidadDis
+    name: values.name,
+    userBuys: values.userBuys,
+    userBuysId: values.userBuysId,
+    descripcion: values.descripcion,
+    cantidad: values.cantidad,
+    valor: values.valor,
   }
-  return this.http.post<IProducto>(`${this.api}/articulos`,sbody,this.httpOptions).pipe(
+  return this.http.post<IProducto>(`${this.api}/buy`,sbody,this.httpOptions).pipe(
     map((productos) => {
       return productos;
     }),
@@ -62,7 +64,7 @@ registerUpdate(values: any) {
     "precio": values.precio,
     "catidadDis": values.catidadDis
   }
-  return this.http.put<IProducto>(`${this.api}/articulos/${id}`,sbody,this.httpOptions).pipe(
+  return this.http.put<IProducto>(`${this.api}/buy/${id}`,sbody,this.httpOptions).pipe(
     map((productos) => {
       return productos;
     }),
@@ -70,8 +72,7 @@ registerUpdate(values: any) {
 }
 delete(id:any) {
   this.httpOptions.headers = this.httpOptions.headers.set('Content-Type', 'application/json');
-
-  return this.http.delete<IProducto>(`${this.api}/articulos//${id}s`,this.httpOptions).pipe(
+  return this.http.delete<IProducto>(`${this.api}/buy/${id}s`,this.httpOptions).pipe(
     map((productos) => {
       return productos;
     }),

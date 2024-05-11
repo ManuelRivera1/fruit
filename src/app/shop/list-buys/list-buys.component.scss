@@ -1,0 +1,43 @@
+/* Aplica a todo el contenedor de la página */
+.container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+  color: #333; /* Color de texto más suave */
+}
+
+/* Estilos para el título */
+h2 {
+  text-align: center; /* Centra el título */
+  color: #205493; /* Color azul oscuro para más formalidad */
+}
+
+/* Estilos para la búsqueda */
+#inputSearch {
+  width: 100%; /* Utiliza todo el ancho de la columna */
+  padding: 8px; /* Más padding para fácil click */
+  border: 2px solid #ccc; /* Bordes más definidos */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilos generales para la tabla */
+.table {
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para la tabla */
+  background-color: #fff; /* Fondo blanco para contrastar con el sombreado */
+}
+
+/* Estilos para las cabeceras de la tabla */
+.table thead th {
+  background-color: #f8f9fa; /* Un suave gris para los encabezados */
+  color: #333; /* Texto oscuro para contraste */
+  padding: 12px 10px; /* Más espacio en los encabezados */
+}
+
+/* Hover effects para filas de la tabla */
+.table tbody tr:hover {
+  background-color: #f1f1f1; /* Cambio de color al hacer hover */
+}
+
+/* Estilos para las celdas de la tabla */
+.table td {
+  padding: 10px; /* Padding suficiente para legibilidad */
+  border-color: #dee2e6; /* Borde más suave */
+}

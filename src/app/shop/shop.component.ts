@@ -3,6 +3,7 @@ import { ShopService } from './shop.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../services/cart.services';
 import { AccountService } from '../account/account.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shop',
@@ -31,7 +32,11 @@ export class ShopComponent implements OnInit {
       if(this.authUser){
         this.cartService.addToCart(producto);
       }else{
-        alert("Debes iniciar sesion para agregar productos al carrito");
+        Swal.fire({
+          title: 'Lo sentimos',
+          text: 'Debes iniciar sesion para agregar productos al carrito',
+          icon: 'warning'
+        });
         this.router.navigateByUrl(this.returnUrl)
       }
     }
