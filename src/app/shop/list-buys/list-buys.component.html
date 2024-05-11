@@ -1,4 +1,4 @@
-<div class="container mt-3 table-responsive" >
+<div class="container mt-3" >
   <div class="row pb-5">
     <div class="col">
     </div>
@@ -9,28 +9,30 @@
       <input id="inputSearch" placeholder="Busca un subprofile" type="text" class="ng-pristine ng-valid ng-touched" (keyup)="searchProfiles($event)">
     </div>
   </div>
-  <table class="table table-bordered table-sm table-striped mt-3" *ngIf="data?.length > 0; else noData">
-    <thead>
-      <tr>
-        <th class="d-none d-md-table-cell">Id</th>
-        <th class="d-none d-md-table-cell">Fecha creación</th>
-        <th class="d-none d-md-table-cell">nombre de productos</th>
-        <th class="d-none d-md-table-cell">Usuario</th>
-        <th class="d-none d-md-table-cell">cantidad</th>
-        <th class="d-none d-md-table-cell">valor</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data">
-        <td>{{item.id}}</td>
-        <td>{{item.createdAt}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.userBuys}}</td>
-        <td>{{item.cantidad}}</td>
-        <td>{{item.valor}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped mt-3" *ngIf="data?.length > 0; else noData">
+      <thead>
+        <tr>
+          <th class="d-none d-md-table-cell">Id</th>
+          <th class="d-none d-md-table-cell">Fecha creación</th>
+          <th class="d-none d-md-table-cell">nombre de productos</th>
+          <th class="d-none d-md-table-cell">Usuario</th>
+          <th class="d-none d-md-table-cell">cantidad</th>
+          <th class="d-none d-md-table-cell">valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{item.id}}</td>
+          <td>{{item.createdAt}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.userBuys}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.valor}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <ng-template #noData>
     <div class="container text-center mt-3">
       <h1> No hay data para mostrar</h1>
